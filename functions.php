@@ -9,3 +9,10 @@ function twentytwentyChildRegisterStyles()
 }
 
 add_action('wp_enqueue_scripts', 'twentytwentyChildRegisterStyles');
+
+function thePasswordFormFilter(string $output): string
+{
+    return is_home() ? '这是一篇受密码保护的文章 😑' : $output;
+}
+
+add_filter('the_password_form', 'thePasswordFormFilter');
