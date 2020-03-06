@@ -10,6 +10,21 @@ function twentytwentyChildRegisterStyles()
 
 add_action('wp_enqueue_scripts', 'twentytwentyChildRegisterStyles');
 
+function modifyDocumentTitleParts(array $title): array
+{
+    if (is_front_page()) {
+        unset($title['tagline']);
+    }
+
+    if (is_search()) {
+        $title['title'] = str_replace(['&#8220;', '&#8221;'], ['「', '」'], $title['title']);
+    }
+
+    return $title;
+}
+
+add_filter('document_title_parts', 'modifyDocumentTitleParts');
+
 function customPasswordForm(string $output): string
 {
     return is_home() ? '这是一篇受密码保护的文章 😑' : $output;
