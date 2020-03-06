@@ -10,12 +10,12 @@ function twentytwentyChildRegisterStyles()
 
 add_action('wp_enqueue_scripts', 'twentytwentyChildRegisterStyles');
 
-function thePasswordFormFilter(string $output): string
+function customPasswordForm(string $output): string
 {
     return is_home() ? '这是一篇受密码保护的文章 😑' : $output;
 }
 
-add_filter('the_password_form', 'thePasswordFormFilter');
+add_filter('the_password_form', 'customPasswordForm');
 
 function autoAddMoreForPost(WP_Post &$post)
 {
@@ -71,3 +71,40 @@ function autoAddMoreForPost(WP_Post &$post)
 }
 
 add_action('the_post', 'autoAddMoreForPost');
+
+function customOriginalExcerpt(string $excerpt, WP_Post $post): string
+{
+    if (is_search()) {
+        $ret = preg_replace('/\s*/', '', strip_tags($post->post_content));
+
+        $s = get_search_query();
+        $keywords = preg_split('/\s+/', $s);
+
+        $firstKeywordLen = mb_strlen($keywords[0]);
+        $firstKeywordPos = mb_stripos($ret, $keywords[0]);
+
+        if ($firstKeywordPos === false) {
+            return $excerpt;
+        }
+
+        $start = $firstKeywordPos > 10 ? $firstKeywordPos - 10 : 0;
+        $length = $firstKeywordLen > 100 ? $firstKeywordLen : 100;
+
+        $ret = mb_strimwidth($ret, $start, $length * 2, '……');
+
+        if ($start > 0) {
+            $ret = '…' . $ret;
+        }
+
+        foreach ($keywords as $v) {
+            $replacement = '<em class="highlight">' . $v . '</em>';
+            $ret = preg_replace('/(' . $v . ')/is', $replacement, $ret);
+        }
+
+        return $ret;
+    }
+
+    return $excerpt;
+}
+
+add_filter('get_the_excerpt', 'customOriginalExcerpt', 10, 2);

@@ -11,3 +11,8 @@ Theme URI: https://github.com/choyri/twentytwenty-child/
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
+
+.highlight {
+    font-style: normal;
+    color: #dd4b39;
+}
