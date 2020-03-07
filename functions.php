@@ -81,6 +81,16 @@ function autoAddMoreForPost(WP_Post &$post)
 
 
     if ($pos = $getPos($eolMatches)) {
+        $firstPrePos = strpos(substr($post->post_content, 0, $pos), '<pre');
+
+        if ($firstPrePos) {
+            $isNoClosingTag = strpos(substr($post->post_content, $firstPrePos, $pos), '</pre>') === false;
+
+            if ($isNoClosingTag) {
+                $pos = $firstPrePos;
+            }
+        }
+
         $replacement = PHP_EOL . '<!--more-->' . PHP_EOL;
         $post->post_content = substr_replace($post->post_content, $replacement, $pos, 0);
     }
