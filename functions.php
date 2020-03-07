@@ -163,3 +163,12 @@ function removeAuthorOfPostMeta(array $postMeta): array
 }
 
 add_filter('twentytwenty_post_meta_location_single_top', 'removeAuthorOfPostMeta', 10, 2);
+
+function modifyArchiveWidgetType(array $args): array
+{
+    $args['type'] = 'yearly';
+
+    return $args;
+}
+
+add_filter('widget_archives_args', 'modifyArchiveWidgetType');
