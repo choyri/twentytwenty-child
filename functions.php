@@ -140,3 +140,16 @@ function customFontFamily(array $fontFamily): array
 }
 
 add_filter('twentytwenty_get_localized_font_family_types', 'customFontFamily');
+
+function removeAuthorOfPostMeta(array $postMeta): array
+{
+    foreach ($postMeta as $key => $meta) {
+        if ($meta === 'author' || $meta === 'comments' && is_home()) {
+            unset($postMeta[$key]);
+        }
+    }
+
+    return $postMeta;
+}
+
+add_filter('twentytwenty_post_meta_location_single_top', 'removeAuthorOfPostMeta', 10, 2);
