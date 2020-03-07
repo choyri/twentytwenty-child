@@ -1,14 +1,15 @@
 <?php
 
-function twentytwentyChildRegisterStyles()
+function enqueueChildStyleAndScript()
 {
     $parentStyle = 'twentytwenty-style';
 
     wp_enqueue_style($parentStyle, get_template_directory_uri() . '/style.css');
     wp_enqueue_style('twentytwenty-child-style', get_stylesheet_uri(), [$parentStyle], wp_get_theme()->get('Version'));
+    wp_enqueue_style('google-font', 'https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap');
 }
 
-add_action('wp_enqueue_scripts', 'twentytwentyChildRegisterStyles');
+add_action('wp_enqueue_scripts', 'enqueueChildStyleAndScript');
 
 function modifyDocumentTitleParts(array $title): array
 {
@@ -123,3 +124,19 @@ function customOriginalExcerpt(string $excerpt, WP_Post $post): string
 }
 
 add_filter('get_the_excerpt', 'customOriginalExcerpt', 10, 2);
+
+function customFontFamily(array $fontFamily): array
+{
+    // https://picturepan2.github.io/spectre/elements/typography.html#typography-fonts
+
+    $fontFamily['zh-CN'] = [
+        '\'Noto Serif SC\'',
+        '-apple-system', 'system-ui', 'BlinkMacSystemFont',
+        '\'Segoe UI\'', 'Roboto', '\'PingFang SC\'', '\'Hiragino Sans GB\'',
+        '\'Microsoft YaHei New\'', '\'Microsoft YaHei\'', '\'Helvetica Neue\'', 'sans-serif',
+    ];
+
+    return $fontFamily;
+}
+
+add_filter('twentytwenty_get_localized_font_family_types', 'customFontFamily');
