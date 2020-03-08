@@ -1,15 +1,34 @@
 <?php
 
+const TWENTYTWENTY_PATH = '/wp-content/themes/twentytwenty';
+const TWENTYTWENTY_URL_CDN_ROOT = 'https://cdn.jsdelivr.net/wp/themes/twentytwenty/1.1';
+
 function enqueueChildStyleAndScript()
 {
     $parentStyle = 'twentytwenty-style';
 
-    wp_enqueue_style($parentStyle, get_template_directory_uri() . '/style.css');
+    wp_enqueue_style($parentStyle, TWENTYTWENTY_URL_CDN_ROOT . '/style.css');
     wp_enqueue_style('twentytwenty-child-style', get_stylesheet_uri(), [$parentStyle], wp_get_theme()->get('Version'));
+
     wp_enqueue_style('google-font', 'https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap');
 }
 
 add_action('wp_enqueue_scripts', 'enqueueChildStyleAndScript');
+
+function replaceAssetsURL(string $src, string $handle): string
+{
+    switch ($handle) {
+        case 'twentytwenty-print-style':
+        case 'twentytwenty-js':
+            $length = strpos($src, TWENTYTWENTY_PATH) + strlen(TWENTYTWENTY_PATH);
+            return substr_replace($src, TWENTYTWENTY_URL_CDN_ROOT, 0, $length);
+        default:
+            return $src;
+    }
+}
+
+add_filter('style_loader_src', 'replaceAssetsURL', 10, 2);
+add_filter('script_loader_src', 'replaceAssetsURL', 10, 2);
 
 function modifyDocumentTitleParts(array $title): array
 {
