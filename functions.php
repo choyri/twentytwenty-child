@@ -30,6 +30,13 @@ function replaceAssetsURL(string $src, string $handle): string
 add_filter('style_loader_src', 'replaceAssetsURL', 10, 2);
 add_filter('script_loader_src', 'replaceAssetsURL', 10, 2);
 
+function addFavicon(string $url): string
+{
+    return 'https://img.choyri.com/favicon.ico';
+}
+
+add_action('get_site_icon_url', 'addFavicon');
+
 function modifyDocumentTitleParts(array $title): array
 {
     if (is_front_page()) {
