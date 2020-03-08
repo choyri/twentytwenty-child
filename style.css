@@ -12,7 +12,45 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+.entry-title.heading-size-1 {
+    font-weight: lighter;
+}
+
+.section-inner.thin,
+.post-meta-wrapper,
+.entry-content > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide),
+[class*="__inner-container"] > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide),
+.comment-respond p:not(.comment-notes) {
+    max-width: 80rem;
+}
+
+.aligncenter figcaption {
+    text-align: center;
+}
+
+.entry-content ul,
+.entry-content ol {
+    padding-left: 0.5rem !important;
+}
+
+code {
+    vertical-align: text-bottom;
+    line-height: 1.7;
+}
+
+.icp {
+    color: #6d6d6d;
+    margin-left: 2.4rem;
+    display: none;
+}
+
 .highlight {
     font-style: normal;
     color: #dd4b39;
+}
+
+@media (min-width: 700px) {
+    .icp {
+        display: block;
+    }
 }
