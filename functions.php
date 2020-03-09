@@ -54,7 +54,7 @@ add_filter('document_title_parts', 'modifyDocumentTitleParts');
 
 function customPasswordForm(string $output): string
 {
-    return is_home() ? '这是一篇受密码保护的文章 😑' : $output;
+    return (is_home() || is_category()) ? '这是一篇受密码保护的文章 😑' : $output;
 }
 
 add_filter('the_password_form', 'customPasswordForm');
