@@ -9,8 +9,10 @@ function enqueueChildStyleAndScript()
 
     wp_enqueue_style($parentStyle, TWENTYTWENTY_URL_CDN_ROOT . '/style.css');
     wp_enqueue_style('twentytwenty-child-style', get_stylesheet_uri(), [$parentStyle], wp_get_theme()->get('Version'));
-
     wp_enqueue_style('google-font', 'https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap');
+
+    wp_enqueue_script('instantpage', 'https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js', [], false, true);
+    wp_script_add_data('instantpage', 'defer', true);
 }
 
 add_action('wp_enqueue_scripts', 'enqueueChildStyleAndScript');
@@ -29,6 +31,20 @@ function replaceAssetsURL(string $src, string $handle): string
 
 add_filter('style_loader_src', 'replaceAssetsURL', 10, 2);
 add_filter('script_loader_src', 'replaceAssetsURL', 10, 2);
+
+function changeTypeOfInstantpage(string $tag, string $handle): string
+{
+    if ('instantpage' !== $handle) {
+        return $tag;
+    }
+
+    $tag = str_replace('type="text/javascript" ', '', $tag);
+    $tag = str_replace('<script', '<script type="module"', $tag);
+
+    return $tag;
+}
+
+add_filter('script_loader_tag', 'changeTypeOfInstantpage', 10, 2);
 
 function addFavicon(string $url): string
 {
