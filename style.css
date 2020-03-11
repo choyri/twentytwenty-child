@@ -38,19 +38,39 @@ code {
     line-height: 1.7;
 }
 
-.icp {
-    color: #6d6d6d;
-    margin-left: 2.4rem;
-    display: none;
-}
-
 .highlight {
     font-style: normal;
     color: #dd4b39;
 }
 
+.footer-copyright {
+    font-weight: normal !important;
+}
+
+#upyun {
+    display: none;
+    color: #6d6d6d;
+    margin-left: 1.4rem;
+}
+
+#upyun img {
+    display: inline;
+    margin-right: 5px;
+    height: 2.7rem;
+}
+
+#icp {
+    display: none;
+    color: #6d6d6d;
+    margin-left: 2.4rem;
+}
+
 @media (min-width: 700px) {
-    .icp {
+    #upyun {
+        display: flex;
+    }
+
+    #icp {
         display: block;
     }
 }
