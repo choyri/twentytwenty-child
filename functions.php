@@ -6,10 +6,14 @@ const TWENTYTWENTY_URL_CDN_ROOT = 'https://cdn.jsdelivr.net/wp/themes/twentytwen
 function enqueueChildStyleAndScript()
 {
     $parentStyle = 'twentytwenty-style';
+    $version = wp_get_theme()->get('Version');
 
     wp_enqueue_style($parentStyle, TWENTYTWENTY_URL_CDN_ROOT . '/style.css');
-    wp_enqueue_style('twentytwenty-child-style', get_stylesheet_uri(), [$parentStyle], wp_get_theme()->get('Version'));
+    wp_enqueue_style('twentytwenty-child-style', get_stylesheet_uri(), [$parentStyle], $version);
     wp_enqueue_style('google-font', 'https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap');
+
+    wp_enqueue_script('twentytwenty-child-js', get_stylesheet_directory_uri() . '/index.js', [], $version, true);
+    wp_script_add_data('twentytwenty-child-js', 'defer', true);
 
     wp_enqueue_script('instantpage', 'https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js', [], false, true);
     wp_script_add_data('instantpage', 'defer', true);
