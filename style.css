@@ -74,3 +74,41 @@ code {
         display: block;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e1e1e1;
+    }
+
+    #site-header,
+    #site-footer,
+    .archive-header,
+    .singular .entry-header,
+    .footer-nav-widgets-wrapper,
+    .search-modal-inner,
+    .search-modal .search-field,
+    pre,
+    input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="date"],
+    input[type="month"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="week"],
+    input[type="number"], input[type="search"], input[type="tel"], input[type="color"], textarea {
+        background-color: #1f1f1f;
+    }
+
+    .site-title a,
+    .entry-title a,
+    :root .has-primary-color {
+        color: #e1e1e1;
+    }
+
+    button:not(.toggle), .button, .faux-button, .wp-block-button__link, .wp-block-file .wp-block-file__button,
+    input[type="button"], input[type="reset"], input[type="submit"],
+    .bg-accent, .bg-accent-hover:hover, .bg-accent-hover:focus,
+    :root .has-accent-background-color, .comment-reply-link {
+        background-color: #1f1f1f;
+    }
+
+    .header-footer-group, body:not(.overlay-header) #site-header .toggle, .menu-modal .toggle {
+        color: #e1e1e1;
+    }
+}
