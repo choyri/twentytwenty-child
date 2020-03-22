@@ -2,7 +2,7 @@
 Theme Name: 鼠与你我
 Text Domain: twentytwenty
 Template: twentytwenty
-Version: 0.0.2
+Version: 0.0.3
 Requires PHP: 7.0
 Description: 子鼠年，万事胜意。
 Author: Chotow
@@ -14,6 +14,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 .entry-title.heading-size-1 {
     font-weight: lighter;
+}
+
+.post-date .meta-text {
+    white-space: nowrap;
 }
 
 .section-inner.thin,
