@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     footerCredits.appendChild(upyun)
 
     let icp = document.createElement('a')
-    icp.href = 'http://www.beian.miit.gov.cn/'
+    icp.href = 'https://beian.miit.gov.cn/'
     icp.rel = 'external nofollow'
     icp.target = '_blank'
     icp.id = 'icp'
