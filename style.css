@@ -16,7 +16,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
     font-weight: lighter;
 }
 
-.post-date .meta-text {
+.post-date .meta-text,
+.post-tags .meta-text {
     white-space: nowrap;
 }
 
