@@ -88,7 +88,7 @@ function autoAddMoreForPost(WP_Post &$post)
     $post->post_content = trim($post->post_content);
 
     // 分割段落
-    preg_match_all('/\n+\s+/', $post->post_content, $eolMatches, PREG_OFFSET_CAPTURE);
+    preg_match_all('/\n+\s*/', $post->post_content, $eolMatches, PREG_OFFSET_CAPTURE);
 
     $getPos = function (array $matches, int $paragraph = 2): int {
         $wantDirectReturn = false;
